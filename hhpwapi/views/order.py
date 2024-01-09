@@ -17,7 +17,7 @@ class OrderView(ViewSet):
             return Response(serializer.data)
         except Order.DoesNotExist as ex:
             return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
-          
+
     def list(self, request):
         """Handle GET requests for every Order
 
@@ -45,6 +45,21 @@ class OrderView(ViewSet):
         )
         serializer = OrderSerializer(order)
         return Response(serializer.data)
+
+    def update(self, request, pk):
+        """Handle PUT requests for a order
+
+        Returns:
+            Response -- Empty body with 204 status code
+        """
+        order = Order.objects.get(pk=pk)
+        order.name=request.data["name"]
+        order.open=request.data["open"]
+        order.customer_phone=request.data["customerPhone"]
+        order.customer_email=request.data["customerEmail"]
+        order.type=request.data["type"]
+        order.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 
 class OrderSerializer(serializers.ModelSerializer):
