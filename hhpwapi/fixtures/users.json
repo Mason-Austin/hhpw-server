@@ -1,0 +1,8 @@
+{
+  "model": "hhpwapi.user",
+  "pk": 0,
+  "fields":{
+    "uid": "n/a",
+    "name": "ex-employee"
+  }
+}
