@@ -2,7 +2,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from ..models import Order
+from ..models import Order, User
 class OrderView(ViewSet):
     """hhpw order view"""
 
@@ -26,6 +26,24 @@ class OrderView(ViewSet):
         """
         orders = Order.objects.all()
         serializer = OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+    def create(self, request):
+        """Handle POST operations
+
+        Returns
+            Response -- JSON serialized order instance
+        """
+        user = User.objects.get(id=request.data["userId"])
+
+        order = Order.objects.create(
+          name=request.data["name"],
+          customer_phone=request.data["customerPhone"],
+          customer_email=request.data["customerEmail"],
+          type=request.data["type"],
+          user=user,
+        )
+        serializer = OrderSerializer(order)
         return Response(serializer.data)
 
 
