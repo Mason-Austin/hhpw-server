@@ -3,9 +3,9 @@ from .order import Order
 
 class Revenue(models.Model):
 
-    total = models.FloatField()
+    total = models.DecimalField(decimal_places=2)
     date = models.DateField(auto_now_add=True)
     payment_type = models.CharField(max_length=50)
-    tip = models.FloatField()
+    tip = models.DecimalField(decimal_places=2)
     order_type = models.CharField(max_length=50)
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
