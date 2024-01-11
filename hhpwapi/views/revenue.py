@@ -15,14 +15,14 @@ class RevenueView(ViewSet):
         revenues = Revenue.objects.all()
         serializer = RevenueSerializer(revenues, many=True)
         return Response(serializer.data)
-      
+
     def create(self, request):
         """Handle POST operations
 
         Returns
           Response -- JSON serialzied Revenue instance"""
-        order = Order.objects.get(id=request.data["orderID"])
-        
+        order = Order.objects.get(id=request.data["orderId"])
+
         revenue = Revenue.objects.create(
           total=request.data["total"],
           payment_type=request.data["paymentType"],
@@ -30,7 +30,7 @@ class RevenueView(ViewSet):
           order_type=request.data["orderType"],
           order=order
         )
-        
+
         serializer = RevenueSerializer(revenue)
         return Response(serializer.data)
 

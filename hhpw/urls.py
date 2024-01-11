@@ -17,10 +17,11 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 from rest_framework import routers
-from hhpwapi.views import register_user, check_user, OrderView
+from hhpwapi.views import register_user, check_user, OrderView, RevenueView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'orders', OrderView, 'order')
+router.register(r'revenues', RevenueView, 'revenue')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
