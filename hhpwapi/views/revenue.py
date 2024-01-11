@@ -2,7 +2,7 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
-from ..models import Revenue, Order
+from ..models import Revenue, Order, OrderItem
 
 class RevenueView(ViewSet):
     """HHPW revenue view"""
@@ -21,13 +21,21 @@ class RevenueView(ViewSet):
 
         Returns
           Response -- JSON serialzied Revenue instance"""
+        total_amount = 0
+
         order = Order.objects.get(id=request.data["orderId"])
 
+        order_items = OrderItem.objects.filter(order=order)
+
+        for order_item in order_items:
+            total_amount += order_item.item.price
+        total_amount += request.data["tip"]
+
         revenue = Revenue.objects.create(
-          total=request.data["total"],
+          total=total_amount,
           payment_type=request.data["paymentType"],
           tip=request.data["tip"],
-          order_type=request.data["orderType"],
+          order_type=order.type,
           order=order
         )
 

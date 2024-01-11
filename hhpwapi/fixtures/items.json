@@ -14,5 +14,37 @@
       "name": "Tuna Pizza",
       "price": 24.99
     }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 2,
+    "fields":{
+      "name": "Vine Pizza",
+      "price": 29.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 2,
+    "fields":{
+      "name": "Rock Pizza",
+      "price": 4.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 2,
+    "fields":{
+      "name": "Crow Wings",
+      "price": 24.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 2,
+    "fields":{
+      "name": "Lizard Wings",
+      "price": 24.99
+    }
   }
 ]
