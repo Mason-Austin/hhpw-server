@@ -2,9 +2,20 @@ from django.http import HttpResponseServerError
 from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
+from rest_framework.decorators import action
 from ..models import Order, User, Item, OrderItem
 class OrderView(ViewSet):
     """hhpw order view"""
+
+    @action(methods=['delete'], detail=True)
+    def remove_items_from_order(self, request, pk):
+        order = Order.objects.get(pk=pk)
+        order_item_id = request.data.get("item")
+        order_item = OrderItem.objects.get(id=order_item_id)
+        order_item.delete()
+            
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
 
     def retrieve(self, request, pk):
         """Handle GET requests for a single order type
