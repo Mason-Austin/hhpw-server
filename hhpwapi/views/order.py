@@ -6,14 +6,25 @@ from rest_framework.decorators import action
 from ..models import Order, User, Item, OrderItem
 class OrderView(ViewSet):
     """hhpw order view"""
+    @action(methods=['post'], detail=True)
+    def add_item_to_order(self, request, pk):
+        order = Order.objects.get(pk=pk)
+        item = Item.objects.get(id=request.data['item'])
+        OrderItem.objects.create(
+            order=order,
+            item=item
+        )
+
+
+        serializer = OrderSerializer(order)
+        return Response(serializer.data)
 
     @action(methods=['delete'], detail=True)
-    def remove_items_from_order(self, request, pk):
+    def remove_item_from_order(self, request, pk):
         order = Order.objects.get(pk=pk)
-        order_item_id = request.data.get("item")
-        order_item = OrderItem.objects.get(id=order_item_id)
+        order_item = OrderItem.objects.get(id=request.data["orderItemId"])
         order_item.delete()
-            
+
         serializer = OrderSerializer(order)
         return Response(serializer.data)
 
