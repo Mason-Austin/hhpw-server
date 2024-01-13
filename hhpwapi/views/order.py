@@ -46,7 +46,11 @@ class OrderView(ViewSet):
         Returns:
             Response -- JSON serialized Orders
         """
-        orders = Order.objects.all()
+        closed = request.query_params.get('closed', None)
+        if closed is not None:
+            orders = Order.objects.filter(open=False)
+        else:
+            orders = Order.objects.filter(open=True)
         serializer = OrderSerializer(orders, many=True)
         return Response(serializer.data)
 
