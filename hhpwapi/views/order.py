@@ -93,10 +93,20 @@ class OrderView(ViewSet):
         order.save()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
+class OrderItemSerializer(serializers.ModelSerializer):
+    """JSON serializer for OrderItem"""
+    
+    price = serializers.ReadOnlyField(source='item.price')
+    name = serializers.ReadOnlyField(source='item.name')
+
+    class Meta:
+        model = OrderItem
+        fields = ('id', 'price', 'name')
 
 class OrderSerializer(serializers.ModelSerializer):
     """JSON serializer for Order"""
+    items = OrderItemSerializer(many=True, read_only=True)
     class Meta:
         model = Order
-        fields = ("id", "name", "open", "customer_phone", "customer_email", "type", "user")
+        fields = ("id", "name", "open", "customer_phone", "customer_email", "type", "user", "items")
         depth = 1

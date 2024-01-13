@@ -55,7 +55,7 @@ class Migration(migrations.Migration):
             name='OrderItem',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='hhpwapi.item')),
+                ('item', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='hhpwapi.item')),
                 ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='hhpwapi.order')),
             ],
         ),
