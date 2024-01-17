@@ -17,10 +17,19 @@ class ItemView(ViewSet):
             serializer = ItemSerializer(item)
             return Response(serializer.data)
         except Item.DoesNotExist as ex:
-          return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+            return Response({'message': ex.args[0]}, status=status.HTTP_404_NOT_FOUND)
+
+    def list(self, request):
+        """Handle GET requests for every Item
+
+        Returns:
+          Response -- JSON serialized Items"""
+        items = Item.objects.all()
+        serializer = ItemSerializer(items, many=True)
+        return Response(serializer.data)
 
 class ItemSerializer(serializers.ModelSerializer):
-      """JSON serializer for Item"""
-      class Meta:
-          model = Item
-          fields = ("id", "name", "price")
+    """JSON serializer for Item"""
+    class Meta:
+        model = Item
+        fields = ("id", "name", "price")
