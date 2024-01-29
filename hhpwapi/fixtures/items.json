@@ -17,7 +17,7 @@
   },
   {
     "model": "hhpwapi.item",
-    "pk": 2,
+    "pk": 3,
     "fields":{
       "name": "Vine Pizza",
       "price": 29.99
@@ -25,7 +25,7 @@
   },
   {
     "model": "hhpwapi.item",
-    "pk": 2,
+    "pk": 4,
     "fields":{
       "name": "Rock Pizza",
       "price": 4.99
@@ -33,7 +33,7 @@
   },
   {
     "model": "hhpwapi.item",
-    "pk": 2,
+    "pk": 5,
     "fields":{
       "name": "Crow Wings",
       "price": 24.99
@@ -41,7 +41,7 @@
   },
   {
     "model": "hhpwapi.item",
-    "pk": 2,
+    "pk": 6,
     "fields":{
       "name": "Lizard Wings",
       "price": 24.99

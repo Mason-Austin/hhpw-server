@@ -9,7 +9,7 @@ class OrderView(ViewSet):
     @action(methods=['post'], detail=True)
     def add_item_to_order(self, request, pk):
         order = Order.objects.get(pk=pk)
-        item = Item.objects.get(id=request.data['item'])
+        item = Item.objects.get(id=request.data['itemId'])
         OrderItem.objects.create(
             order=order,
             item=item
@@ -69,16 +69,7 @@ class OrderView(ViewSet):
           type=request.data["type"],
           user=user,
         )
-
-        items = request.data["items"]
-
-        for item in items:
-            item = Item.objects.get(id=item)
-            OrderItem.objects.create(
-                order=order,
-                item=item
-            )
-
+        
         serializer = OrderSerializer(order)
         return Response(serializer.data)
 
@@ -95,6 +86,11 @@ class OrderView(ViewSet):
         order.customer_email=request.data["customerEmail"]
         order.type=request.data["type"]
         order.save()
+        return Response(None, status=status.HTTP_204_NO_CONTENT)
+    
+    def destroy(self, request, pk):
+        order = Order.objects.get(pk=pk)
+        order.delete()
         return Response(None, status=status.HTTP_204_NO_CONTENT)
 
 class OrderItemSerializer(serializers.ModelSerializer):
