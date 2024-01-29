@@ -1,0 +1,50 @@
+[
+  {
+    "model": "hhpwapi.item",
+    "pk": 1,
+    "fields":{
+      "name": "Hotdog Pizza",
+      "price": 19.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 2,
+    "fields":{
+      "name": "Tuna Pizza",
+      "price": 24.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 3,
+    "fields":{
+      "name": "Vine Pizza",
+      "price": 29.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 4,
+    "fields":{
+      "name": "Rock Pizza",
+      "price": 4.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 5,
+    "fields":{
+      "name": "Crow Wings",
+      "price": 24.99
+    }
+  },
+  {
+    "model": "hhpwapi.item",
+    "pk": 6,
+    "fields":{
+      "name": "Lizard Wings",
+      "price": 24.99
+    }
+  }
+]
